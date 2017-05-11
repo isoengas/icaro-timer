@@ -1,0 +1,176 @@
+import { Subject } from 'rxjs';
+export type TimerStatus = "Idle" | "Ready" | "Work" | "Rest" | "Finished";
+export type TimerDirection = "Up" | "Down";
+
+export class TimerStep {
+    status: TimerStatus;
+    direction: TimerDirection;
+    time: ITime;
+    roundNumber: number;
+    totalRounds: number;
+}
+
+export class Timer {
+    public running: boolean = false;
+    public timer;
+    private steps: Array<TimerStep>;
+    private currentStep: TimerStep;
+
+    private currentTime: ITime = { minutes: 0, seconds: 0 };
+    private currentStatus: TimerStatus = "Idle";
+    public currentTime$ = new Subject<ITime>();
+    public currentStatus$ = new Subject<TimerStatus>();
+    public currentStep$ = new Subject<TimerStep>();
+
+    public startAMPRAP(settings: IAmrapSettings) : void {
+        this.currentStep = null;
+        this.steps = this.getAmrapSteps(settings);
+        this.initTimer();
+    }
+
+    private getAmrapSteps(settings: IAmrapSettings): Array<TimerStep> {
+        const result = new Array<TimerStep>();
+        result.push(this.readyStep());
+        for (let i = 1; i <= settings.numRounds; i++) {
+            result.push({
+                status: "Work",
+                direction: "Down",
+                time: settings.workTime,
+                roundNumber: i,
+                totalRounds: settings.numRounds
+            });
+            if (settings.restTime.minutes > 0 || settings.restTime.seconds > 0) {
+                result.push({
+                    status: "Rest",
+                    direction: "Down",
+                    time: settings.restTime,
+                    roundNumber: i,
+                    totalRounds: settings.numRounds
+                });
+            }
+        }
+        return result;
+    }
+
+    public startTimer(settings: ITimerSettings): void {
+        this.currentStep = null;
+        this.steps = this.getTimerSteps(settings);
+        this.initTimer();
+    }
+
+    private getTimerSteps(settings: ITimerSettings): Array<TimerStep> {
+        const result = new Array<TimerStep>();
+        result.push(this.readyStep());
+        const workTime = settings.timeCap || { minutes: 99, seconds: 59 };
+        result.push({
+            status: "Work",
+            direction: settings.timerDirection,
+            time: workTime,
+            roundNumber: 1,
+            totalRounds: 1
+        });
+        return result;
+    }
+
+    private initTimer(): void {
+        if (this.timer) {
+            this.clearTimer();
+        }
+        this.timer = setInterval(() => this.everySecond(), 1000);
+    }
+
+    private clearTimer(): void {
+        clearInterval(this.timer);
+    }
+
+    private everySecond(): void {
+        if (!this.currentStep) {
+            if (this.steps.length > 0) {
+                this.setCurrentStep(this.steps.shift());
+            } else if (this.currentStatus !== "Finished") {
+                this.currentStatus = "Finished";
+                this.currentStatus$.next(this.currentStatus);
+            }
+            return;
+        }
+        if (this.currentStep.direction == "Up") {
+            this.currentTime = this.incrementedOneSecond(this.currentTime);
+            if (this.currentTime.minutes === this.currentStep.time.minutes && this.currentTime.seconds === this.currentStep.time.seconds) {
+                this.currentStep = null;
+            }
+        } else {
+            this.currentTime = this.decrementedOneSecond(this.currentTime);
+            if (this.currentTime.minutes === 0 && this.currentTime.minutes === 0) {
+                this.currentStep = null;
+            }
+        }
+        this.currentTime$.next(this.currentTime);
+    }
+
+    private setCurrentStep(step: TimerStep): void {
+        this.currentStep = step;
+        if (step.direction == "Down") {
+            this.currentTime = step.time;
+        } else {
+            this.currentTime = { minutes: 0, seconds: 0 };
+        }
+        this.currentTime$.next(this.currentTime);
+        this.currentStatus = step.status;
+        this.currentStatus$.next(this.currentStatus);
+    }
+
+    private incrementedOneSecond(currentTime: ITime): ITime {
+        const result: ITime = {
+            seconds: currentTime.seconds + 1,
+            minutes: currentTime.minutes
+        };
+        if (result.seconds === 60) {
+            result.seconds = 0;
+            result.minutes += 1;
+        }
+        return result;
+    }
+
+    private decrementedOneSecond(currentTime: ITime): ITime {
+        const result: ITime = {
+            seconds: currentTime.seconds - 1,
+            minutes: currentTime.minutes
+        };
+        if (result.seconds === -1) {
+            result.seconds = 59;
+            result.minutes -= 1;
+        }
+        return result;
+    }
+
+    private readyStep() : TimerStep {
+        return {
+            status: "Ready",
+            direction: "Down",
+            time: {
+                seconds: 10,
+                minutes: 0 
+            },
+            roundNumber: 0,
+            totalRounds: 0
+        };
+    }
+}
+
+export interface ITime
+{
+    minutes: number;
+    seconds: number;
+}
+
+export interface IAmrapSettings {
+    numRounds: number;
+    workTime: ITime;
+    restTime: ITime;
+}
+
+export interface ITimerSettings {
+    timeCap?: ITime;
+    timerDirection: TimerDirection;
+
+}
