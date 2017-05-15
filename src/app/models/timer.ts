@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 export type TimerStatus = "Idle" | "Ready" | "Work" | "Rest" | "Finished";
 export type TimerDirection = "Up" | "Down";
@@ -10,6 +11,7 @@ export class TimerStep {
     totalRounds: number;
 }
 
+@Injectable()
 export class Timer {
     public running: boolean = false;
     public timer;
@@ -157,8 +159,7 @@ export class Timer {
     }
 }
 
-export interface ITime
-{
+export interface ITime {
     minutes: number;
     seconds: number;
 }

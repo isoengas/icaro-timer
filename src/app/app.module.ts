@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { StopwatchComponent } from './stopwatch/stopwatch.component';
 import { StatusDisplayComponent } from './status-display/status-display.component';
+import { Timer } from './models/timer';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { StatusDisplayComponent } from './status-display/status-display.componen
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [
+    Timer
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
