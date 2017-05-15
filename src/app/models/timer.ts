@@ -1,6 +1,6 @@
 import { Subject } from 'rxjs';
-export type TimerStatus = "Idle" | "Ready" | "Work" | "Rest" | "Finished";
-export type TimerDirection = "Up" | "Down";
+export type TimerStatus = 'Idle' | 'Ready' | 'Work' | 'Rest' | 'Finished';
+export type TimerDirection = 'Up' |'Down';
 
 export class TimerStep {
     status: TimerStatus;
@@ -11,18 +11,17 @@ export class TimerStep {
 }
 
 export class Timer {
-    public running: boolean = false;
-    public timer;
+    public running = false;
+    // public timer;
     private steps: Array<TimerStep>;
-    private currentStep: TimerStep;
-
-    private currentTime: ITime = { minutes: 0, seconds: 0 };
-    private currentStatus: TimerStatus = "Idle";
+    public currentStep: TimerStep;
+    public currentTime: ITime = { minutes: 0, seconds: 0 };
+    public currentStatus: TimerStatus = 'Idle';
     public currentTime$ = new Subject<ITime>();
     public currentStatus$ = new Subject<TimerStatus>();
     public currentStep$ = new Subject<TimerStep>();
 
-    public startAMPRAP(settings: IAmrapSettings) : void {
+    public startAMPRAP(settings: IAmrapSettings): void {
         this.currentStep = null;
         this.steps = this.getAmrapSteps(settings);
         this.initTimer();
@@ -33,16 +32,16 @@ export class Timer {
         result.push(this.readyStep());
         for (let i = 1; i <= settings.numRounds; i++) {
             result.push({
-                status: "Work",
-                direction: "Down",
+                status: 'Work',
+                direction: 'Down',
                 time: settings.workTime,
                 roundNumber: i,
                 totalRounds: settings.numRounds
             });
             if (settings.restTime.minutes > 0 || settings.restTime.seconds > 0) {
                 result.push({
-                    status: "Rest",
-                    direction: "Down",
+                    status: 'Rest',
+                    direction: 'Down',
                     time: settings.restTime,
                     roundNumber: i,
                     totalRounds: settings.numRounds
@@ -53,6 +52,7 @@ export class Timer {
     }
 
     public startTimer(settings: ITimerSettings): void {
+        this.running = true;
         this.currentStep = null;
         this.steps = this.getTimerSteps(settings);
         this.initTimer();
@@ -63,7 +63,7 @@ export class Timer {
         result.push(this.readyStep());
         const workTime = settings.timeCap || { minutes: 99, seconds: 59 };
         result.push({
-            status: "Work",
+            status: 'Work',
             direction: settings.timerDirection,
             time: workTime,
             roundNumber: 1,
@@ -73,34 +73,40 @@ export class Timer {
     }
 
     private initTimer(): void {
-        if (this.timer) {
-            this.clearTimer();
-        }
-        this.timer = setInterval(() => this.everySecond(), 1000);
+        // if (this.timer) {
+        //     this.clearTimer();
+        // }
+        this.everySecond();
+        // this.timer = setInterval(() => this.everySecond(), 1000);
     }
 
-    private clearTimer(): void {
-        clearInterval(this.timer);
+    // private clearTimer(): void {
+    //     clearInterval(this.timer);
+    // }
+
+    public pulse(): void {
+        this.everySecond();
     }
 
     private everySecond(): void {
         if (!this.currentStep) {
             if (this.steps.length > 0) {
                 this.setCurrentStep(this.steps.shift());
-            } else if (this.currentStatus !== "Finished") {
-                this.currentStatus = "Finished";
+            } else if (this.currentStatus !== 'Finished') {
+                this.currentStatus = 'Finished';
+                this.running = false;
                 this.currentStatus$.next(this.currentStatus);
             }
             return;
         }
-        if (this.currentStep.direction == "Up") {
+        if (this.currentStep.direction === 'Up') {
             this.currentTime = this.incrementedOneSecond(this.currentTime);
             if (this.currentTime.minutes === this.currentStep.time.minutes && this.currentTime.seconds === this.currentStep.time.seconds) {
                 this.currentStep = null;
             }
         } else {
             this.currentTime = this.decrementedOneSecond(this.currentTime);
-            if (this.currentTime.minutes === 0 && this.currentTime.minutes === 0) {
+            if (this.currentTime.minutes === 0 && this.currentTime.seconds === 0) {
                 this.currentStep = null;
             }
         }
@@ -109,7 +115,7 @@ export class Timer {
 
     private setCurrentStep(step: TimerStep): void {
         this.currentStep = step;
-        if (step.direction == "Down") {
+        if (step.direction === 'Down') {
             this.currentTime = step.time;
         } else {
             this.currentTime = { minutes: 0, seconds: 0 };
@@ -143,13 +149,13 @@ export class Timer {
         return result;
     }
 
-    private readyStep() : TimerStep {
+    private readyStep(): TimerStep {
         return {
-            status: "Ready",
-            direction: "Down",
+            status: 'Ready',
+            direction: 'Down',
             time: {
                 seconds: 10,
-                minutes: 0 
+                minutes: 0
             },
             roundNumber: 0,
             totalRounds: 0
@@ -157,8 +163,7 @@ export class Timer {
     }
 }
 
-export interface ITime
-{
+export interface ITime {
     minutes: number;
     seconds: number;
 }
