@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ITime } from '../models/timer';
 
 @Component({
   selector: 'app-stopwatch',
@@ -6,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./stopwatch.component.css']
 })
 export class StopwatchComponent implements OnInit {
-
+  @Input()
+  public timer: ITime;
   constructor() { }
 
   ngOnInit() {

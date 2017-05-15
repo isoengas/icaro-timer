@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { TimerStatus } from '../models/timer';
 
 @Component({
   selector: 'app-status-display',
@@ -6,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./status-display.component.css']
 })
 export class StatusDisplayComponent implements OnInit {
-
+  @Input()
+  public status: TimerStatus;
   constructor() { }
 
   ngOnInit() {
