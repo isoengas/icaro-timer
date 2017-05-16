@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StopwatchComponent } from './stopwatch.component';
+import { Timer } from '../models/timer';
 
 describe('StopwatchComponent', () => {
   let component: StopwatchComponent;
@@ -8,7 +9,8 @@ describe('StopwatchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StopwatchComponent ]
+      declarations: [ StopwatchComponent ],
+      providers: [ Timer ]
     })
     .compileComponents();
   }));
