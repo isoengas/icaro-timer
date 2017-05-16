@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ITime } from '../models/timer';
+import { ITime } from '../services/timer';
 
 @Component({
   selector: 'app-stopwatch',

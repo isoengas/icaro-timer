@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TimerStatus } from '../models/timer';
+import { TimerStatus } from '../services/timer';
 
 @Component({
   selector: 'app-status-display',

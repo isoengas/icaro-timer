@@ -1,4 +1,6 @@
 import { Timer, ITimerSettings } from './timer';
+import { FakeClockService } from './clock.service';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 describe('Timer tests', () => {
     let timer: Timer;
@@ -10,7 +12,7 @@ describe('Timer tests', () => {
         }
     };
     beforeEach(() => {
-        timer = new Timer();
+        timer = new Timer(new FakeClockService());
     });
 
     it('should not be running when created', () => {
@@ -31,18 +33,19 @@ describe('Timer tests', () => {
         expect(timer.currentTime.minutes).toBe(0);
         expect(timer.currentStep.direction).toBe('Down');
     });
-    it('should count down to 0 on Ready state', () => {
+    it('should count down to 1 on Ready state', () => {
         timer.startTimer(timerUpSettings);
-        for (let i = 1; i <= 10; i++) {
+        for (let i = 1; i <= 9; i++) {
             timer.pulse();
             expect(timer.currentTime.seconds).toBe(10 - i);
             expect(timer.currentTime.minutes).toBe(0);
         }
         expect(timer.currentStatus).toBe('Ready');
+        expect(timer.currentTime.seconds).toBe(1);
     });
     it('should start counting after ready state', () => {
         timer.startTimer(timerUpSettings);
-        for (let i = 1; i <= 10; i++) {
+        for (let i = 1; i <= 9; i++) {
             timer.pulse();
         }
         timer.pulse();
@@ -50,7 +53,7 @@ describe('Timer tests', () => {
         expect(timer.currentTime.seconds).toBe(0);
         expect(timer.currentTime.minutes).toBe(0);
         // work timer
-        for (let i = 1; i <= 5; i++) {
+        for (let i = 1; i <= 4; i++) {
             timer.pulse();
             expect(timer.currentTime.minutes).toBe(0);
             expect(timer.currentTime.seconds).toBe(i);
@@ -60,7 +63,7 @@ describe('Timer tests', () => {
     it('should finish when reaching final time', () => {
         timer.startTimer(timerUpSettings);
         // Ready countdown
-        for (let i = 1; i <= 10; i++) {
+        for (let i = 1; i <= 9; i++) {
             timer.pulse();
         }
         // Work
@@ -68,7 +71,6 @@ describe('Timer tests', () => {
         for (let i = 1; i <= timerUpSettings.timeCap.seconds; i++) {
             timer.pulse();
         }
-        timer.pulse();
         expect(timer.currentStatus).toBe('Finished');
         expect(timer.running).toBe(false);
     });

@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StopwatchComponent } from './stopwatch.component';
-import { Timer } from '../models/timer';
+import { Timer } from '../services/timer';
 
 describe('StopwatchComponent', () => {
   let component: StopwatchComponent;

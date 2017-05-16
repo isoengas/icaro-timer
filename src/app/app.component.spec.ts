@@ -3,7 +3,8 @@ import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { StopwatchComponent} from './stopwatch/stopwatch.component';
 import { StatusDisplayComponent} from './status-display/status-display.component';
-import { Timer } from './models/timer';
+import { Timer } from './services/timer';
+import { ClockService } from './services/clock.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -14,7 +15,8 @@ describe('AppComponent', () => {
         StatusDisplayComponent
       ],
       providers: [
-        Timer
+        Timer,
+        ClockService
       ]
     }).compileComponents();
   }));

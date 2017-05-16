@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
+import { ClockService } from './clock.service';
+
 export type TimerStatus = 'Idle' | 'Ready' | 'Work' | 'Rest' | 'Finished';
 export type TimerDirection = 'Up' |'Down';
 
@@ -22,6 +24,10 @@ export class Timer {
     public currentTime$ = new Subject<ITime>();
     public currentStatus$ = new Subject<TimerStatus>();
     public currentStep$ = new Subject<TimerStep>();
+
+    constructor(private clock: ClockService) {
+        this.clock.tick.subscribe(() => this.pulse());
+    }
 
     public startAMPRAP(settings: IAmrapSettings): void {
         this.currentStep = null;
@@ -79,6 +85,7 @@ export class Timer {
         //     this.clearTimer();
         // }
         this.everySecond();
+        this.clock.start();
         // this.timer = setInterval(() => this.everySecond(), 1000);
     }
 
@@ -98,6 +105,7 @@ export class Timer {
                 this.currentStatus = 'Finished';
                 this.running = false;
                 this.currentStatus$.next(this.currentStatus);
+                this.clock.stop();
             }
             return;
         }
@@ -105,11 +113,13 @@ export class Timer {
             this.currentTime = this.incrementedOneSecond(this.currentTime);
             if (this.currentTime.minutes === this.currentStep.time.minutes && this.currentTime.seconds === this.currentStep.time.seconds) {
                 this.currentStep = null;
+                this.everySecond();
             }
         } else {
             this.currentTime = this.decrementedOneSecond(this.currentTime);
             if (this.currentTime.minutes === 0 && this.currentTime.seconds === 0) {
                 this.currentStep = null;
+                this.everySecond();
             }
         }
         this.currentTime$.next(this.currentTime);

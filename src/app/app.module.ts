@@ -6,7 +6,8 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { StopwatchComponent } from './stopwatch/stopwatch.component';
 import { StatusDisplayComponent } from './status-display/status-display.component';
-import { Timer } from './models/timer';
+import { Timer } from './services/timer';
+import { ClockService } from './services/clock.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { Timer } from './models/timer';
     HttpModule
   ],
   providers: [
-    Timer
+    Timer,
+    ClockService
   ],
   bootstrap: [AppComponent]
 })
