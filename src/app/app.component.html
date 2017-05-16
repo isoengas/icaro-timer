@@ -2,6 +2,9 @@
   <app-stopwatch [timer]="timerService.currentTime"></app-stopwatch>
 </div>
 <div>
+  <app-round-display [currentStep]="timerService.currentStep"></app-round-display>
+</div>
+<div>
   <app-status-display [status]="timerService.currentStatus"></app-status-display>
 </div>
 <div>

@@ -3,6 +3,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { StopwatchComponent} from './stopwatch/stopwatch.component';
 import { StatusDisplayComponent} from './status-display/status-display.component';
+import { RoundDisplayComponent} from './round-display/round-display.component';
 import { Timer } from './services/timer';
 import { ClockService } from './services/clock.service';
 
@@ -12,7 +13,8 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         StopwatchComponent,
-        StatusDisplayComponent
+        StatusDisplayComponent,
+        RoundDisplayComponent
       ],
       providers: [
         Timer,

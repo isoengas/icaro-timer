@@ -8,12 +8,14 @@ import { StopwatchComponent } from './stopwatch/stopwatch.component';
 import { StatusDisplayComponent } from './status-display/status-display.component';
 import { Timer } from './services/timer';
 import { ClockService } from './services/clock.service';
+import { RoundDisplayComponent } from './round-display/round-display.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StopwatchComponent,
-    StatusDisplayComponent
+    StatusDisplayComponent,
+    RoundDisplayComponent
   ],
   imports: [
     BrowserModule,
