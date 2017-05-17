@@ -1,6 +1,6 @@
 <div class="hero is-dark">
   <div class="columns">
-    <div class="column is-3">
+    <div class="column is-2">
       <div>
         <a class="button is-large" (click)="startTimer()">Start timer!</a>
       </div>
@@ -8,17 +8,13 @@
         <a class="button is-large" (click)="startAmrap()">Start AMRAP!</a>
       </div>
     </div>
-    <div class="column is-9">
-      <div class="hero is-fullheight is-dark has-text-centered">
-        <div class="hero-body">
-            <div class="container">
-              <app-round-display [currentStep]="timerService.currentStep"></app-round-display>
-            </div>
-            <div class="container">
-              <app-stopwatch [timer]="timerService.currentTime"></app-stopwatch>
-            </div>
-            <div class="container">
-              <app-status-display [status]="timerService.currentStatus"></app-status-display>
+    <div class="column auto">
+      <div class="hero is-fullheight is-dark">
+        <div>
+            <div>
+                <app-round-display class="column" [currentStep]="timerService.currentStep"></app-round-display>
+                <app-stopwatch class="column" [timer]="timerService.currentTime"></app-stopwatch>
+                <app-status-display class="column" [status]="timerService.currentStatus"></app-status-display>
             </div>
         </div>
       </div>
