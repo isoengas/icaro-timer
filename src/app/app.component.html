@@ -1,15 +1,27 @@
-<div>
-  <app-stopwatch [timer]="timerService.currentTime"></app-stopwatch>
-</div>
-<div>
-  <app-round-display [currentStep]="timerService.currentStep"></app-round-display>
-</div>
-<div>
-  <app-status-display [status]="timerService.currentStatus"></app-status-display>
-</div>
-<div>
-  <button (click)="startTimer()">Start timer!</button>
-</div>
-<div>
-  <button (click)="startAmrap()">Start AMRAP!</button>
+<div class="hero is-dark">
+  <div class="columns">
+    <div class="column is-3">
+      <div>
+        <a class="button is-large" (click)="startTimer()">Start timer!</a>
+      </div>
+      <div>
+        <a class="button is-large" (click)="startAmrap()">Start AMRAP!</a>
+      </div>
+    </div>
+    <div class="column is-9">
+      <div class="hero is-fullheight is-dark has-text-centered">
+        <div class="hero-body">
+            <div class="container">
+              <app-round-display [currentStep]="timerService.currentStep"></app-round-display>
+            </div>
+            <div class="container">
+              <app-stopwatch [timer]="timerService.currentTime"></app-stopwatch>
+            </div>
+            <div class="container">
+              <app-status-display [status]="timerService.currentStatus"></app-status-display>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
