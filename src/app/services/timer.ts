@@ -66,6 +66,16 @@ export class Timer {
         this.initTimer();
     }
 
+    public pause(): void {
+        this.running = false;
+        this.clock.stop();
+    }
+
+    public resume(): void {
+        this.running = true;
+        this.clock.start();
+    }
+
     private getTimerSteps(settings: ITimerSettings): Array<TimerStep> {
         const result = new Array<TimerStep>();
         result.push(this.readyStep());
