@@ -1,1 +1,1 @@
-<div class="round-display has-text-centered">Round {{currentStep?.roundNumber}} / {{currentStep?.totalRounds}}</div>
+<div class="round-display has-text-centered" [ngClass]="currentStep?.status">{{roundDisplay | uppercase}}</div>

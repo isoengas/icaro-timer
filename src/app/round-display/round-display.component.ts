@@ -13,5 +13,13 @@ export class RoundDisplayComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  public get roundDisplay(): string {
+    if (!this.currentStep) {
+      return '(press start)';
+    }
+    if (this.currentStep.totalRounds === 0) {
+      return 'no rounds';
+    }
+    return `Round ${this.currentStep.roundNumber} of ${this.currentStep.totalRounds}`;
+  }
 }
