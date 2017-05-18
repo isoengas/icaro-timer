@@ -1,3 +1,19 @@
 .status-display {
     font-size: 10vmin;
+    border-radius: 0.5em;
+}
+.Idle {
+    opacity: 0;
+}
+.Ready {
+    background: #022ee2;
+}
+.Work {
+    background: #e20202;
+}
+.Rest {
+    background: #7a7a7a;
+}
+.Finished {
+    background: #01ad0d;
 }
