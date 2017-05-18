@@ -2,6 +2,8 @@
     font-size: 10vmin;
     border-radius: 0.5em;
     font-family: 'Oswald', sans-serif;
+    margin-left: 2em;
+    margin-right: 2em;
 }
 .Idle {
     opacity: 0;
