@@ -1,6 +1,7 @@
 .status-display {
     font-size: 10vmin;
     border-radius: 0.5em;
+    font-family: 'Oswald', sans-serif;
 }
 .Idle {
     opacity: 0;
