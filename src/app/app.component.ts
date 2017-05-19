@@ -7,7 +7,7 @@ import { Timer, ITimerSettings, IAmrapSettings } from './services/timer';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  isSetup = false;
   constructor(public timerService: Timer) {}
 
   startTimer(): void {
@@ -45,5 +45,8 @@ export class AppComponent {
   }
   resume(): void {
     this.timerService.resume();
+  }
+  setup(): void {
+    this.isSetup = true;
   }
 }

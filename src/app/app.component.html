@@ -1,5 +1,12 @@
 <div class="hero is-dark">
   <div class="columns hero is-fullheight is-dark is-gapless">
+    <div class="setup" *ngIf="!timerService.currentStep">
+      <a class="button is-large" (click)="setup()">
+        <span class="icon is-large">
+          <i class="fa fa-wrench"></i>
+        </span>
+      </a>
+    </div>
     <app-round-display class="column" [currentStep]="timerService.currentStep"></app-round-display>
     <app-stopwatch class="column" [timer]="timerService.currentTime" [isRunning]="timerService.running"></app-stopwatch>
     <app-status-display class="column" [status]="timerService.currentStatus"></app-status-display>
@@ -12,4 +19,11 @@
                  (clear)="stop()">
     </app-toolbar>
   </div>
+</div>
+<div class="modal" [ngClass]="{'is-active': isSetup}">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <app-setup></app-setup>
+  </div>
+  <button class="modal-close" (click)="isSetup=false"></button>
 </div>
