@@ -15,7 +15,7 @@ export class RoundDisplayComponent implements OnInit {
   }
   public get roundDisplay(): string {
     if (!this.currentStep) {
-      return '(press start)';
+      return ' ';
     }
     if (this.currentStep.totalRounds === 0) {
       return 'no rounds';
