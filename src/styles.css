@@ -1,7 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 html {
     background: black;
-    height: 100%;
+    height: 100%; 
+}
+body {
+    font-family: 'Oswald', sans-serif;
 }
 
 @import '../node_modules/bulma/css/bulma.css';

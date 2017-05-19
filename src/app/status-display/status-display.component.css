@@ -1,9 +1,8 @@
 .status-display {
     font-size: 10vmin;
     border-radius: 0.5em;
-    font-family: 'Oswald', sans-serif;
-    margin-left: 2em;
-    margin-right: 2em;
+    margin-left: 1.5em;
+    margin-right: 1.5em;
 }
 .Idle {
     opacity: 0;
