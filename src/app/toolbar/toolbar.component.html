@@ -1,17 +1,42 @@
 <div class="level is-mobile">
   <div *ngIf="canStart" class="level-item">
-    <a class="button is-large" (click)="start.emit()">Start!</a>
+    <a class="button is-large" (click)="start.emit()">
+      <span class="icon is-large">
+        <i class="fa fa-play"></i>
+      </span>
+      <span>Start</span>
+    </a>
   </div>
   <div *ngIf="canStop" class="level-item">
-    <a class="button is-large" (click)="stop.emit()">Stop</a>
+    <a class="button is-large" (click)="stop.emit()">
+      <span class="icon is-large">
+        <i class="fa fa-stop"></i>
+      </span>
+      <span>Stop</span>
+    </a>
   </div>
   <div *ngIf="canPause" class="level-item">
-    <a class="button is-large" (click)="pause.emit()">Pause</a>
+    <a class="button is-large" (click)="pause.emit()">
+      <span class="icon is-large">
+        <i class="fa fa-pause"></i>
+      </span>
+      <span>Pause</span>
+    </a>
   </div>
   <div *ngIf="canResume" class="level-item">
-    <a class="button is-large" (click)="resume.emit()">Resume</a>
+    <a class="button is-large" (click)="resume.emit()">
+      <span class="icon is-large">
+        <i class="fa fa-play"></i>
+      </span>
+      <span>Resume</span>
+    </a>
   </div>
   <div *ngIf="canClear" class="level-item">
-    <a class="button is-large" (click)="clear.emit()">Clear</a>
+    <a class="button is-large" (click)="clear.emit()">
+      <span class="icon is-large">
+        <i class="fa fa-refresh"></i>
+      </span>
+      <span>Clear</span>
+    </a>
   </div>
 </div>
