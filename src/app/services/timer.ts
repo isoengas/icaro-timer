@@ -47,7 +47,7 @@ export class Timer {
                 roundNumber: i,
                 totalRounds: settings.numRounds
             });
-            if (settings.restTime.minutes > 0 || settings.restTime.seconds > 0) {
+            if ((settings.restTime.minutes > 0 || settings.restTime.seconds > 0) && i < settings.numRounds) {
                 result.push({
                     status: 'Rest',
                     direction: 'Down',
