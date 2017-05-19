@@ -9,13 +9,15 @@ import { StatusDisplayComponent } from './status-display/status-display.componen
 import { Timer } from './services/timer';
 import { ClockService } from './services/clock.service';
 import { RoundDisplayComponent } from './round-display/round-display.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StopwatchComponent,
     StatusDisplayComponent,
-    RoundDisplayComponent
+    RoundDisplayComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,

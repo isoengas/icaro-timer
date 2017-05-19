@@ -9,6 +9,8 @@ import { ITime } from '../services/timer';
 export class StopwatchComponent implements OnInit {
   @Input()
   public timer: ITime;
+  @Input()
+  public isRunning: boolean;
   constructor() { }
 
   ngOnInit() {

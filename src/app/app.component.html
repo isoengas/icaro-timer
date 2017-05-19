@@ -1,13 +1,15 @@
 <div class="hero is-dark">
   <div class="columns hero is-fullheight is-dark is-gapless">
     <app-round-display class="column" [currentStep]="timerService.currentStep"></app-round-display>
-    <app-stopwatch class="column" [timer]="timerService.currentTime"></app-stopwatch>
+    <app-stopwatch class="column" [timer]="timerService.currentTime" [isRunning]="timerService.running"></app-stopwatch>
     <app-status-display class="column" [status]="timerService.currentStatus"></app-status-display>
-    <div class="columns has-text-centered is-gapless">
-      <div class="column is-half is-offset-one-quarter">
-        <a class="button is-large" (click)="startTimer()">Start timer!</a>
-        <a class="button is-large" (click)="startAmrap()">Start AMRAP!</a>
-      </div>             
-    </div>
+    <app-toolbar class="column" [status]="timerService.currentStatus" 
+                 [isRunning]="timerService.running"
+                 (start)="startAmrap()"
+                 (stop)="stop()"
+                 (pause)="pause()"
+                 (resume)="resume()"
+                 (clear)="stop()">
+    </app-toolbar>
   </div>
 </div>

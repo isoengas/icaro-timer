@@ -30,6 +30,7 @@ export class Timer {
     }
 
     public startAMPRAP(settings: IAmrapSettings): void {
+        this.running = true;
         this.currentStep = null;
         this.steps = this.getAmrapSteps(settings);
         this.initTimer();
@@ -74,6 +75,15 @@ export class Timer {
     public resume(): void {
         this.running = true;
         this.clock.start();
+    }
+
+    public stop(): void {
+        this.currentStatus = 'Idle';
+        this.currentStep = null;
+        this.running = false;
+        this.steps = [];
+        this.currentTime = { minutes: 0, seconds: 0 };
+        this.clock.stop();
     }
 
     private getTimerSteps(settings: ITimerSettings): Array<TimerStep> {

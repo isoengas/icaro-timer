@@ -1,0 +1,17 @@
+<div class="level is-mobile">
+  <div *ngIf="canStart" class="level-item">
+    <a class="button is-large" (click)="start.emit()">Start!</a>
+  </div>
+  <div *ngIf="canStop" class="level-item">
+    <a class="button is-large" (click)="stop.emit()">Stop</a>
+  </div>
+  <div *ngIf="canPause" class="level-item">
+    <a class="button is-large" (click)="pause.emit()">Pause</a>
+  </div>
+  <div *ngIf="canResume" class="level-item">
+    <a class="button is-large" (click)="resume.emit()">Resume</a>
+  </div>
+  <div *ngIf="canClear" class="level-item">
+    <a class="button is-large" (click)="clear.emit()">Clear</a>
+  </div>
+</div>

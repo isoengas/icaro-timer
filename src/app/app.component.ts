@@ -35,4 +35,15 @@ export class AppComponent {
     };
     this.timerService.startAMPRAP(amrapSettings);
   }
+
+  stop(): void {
+    this.timerService.stop();
+  }
+
+  pause(): void {
+    this.timerService.pause();
+  }
+  resume(): void {
+    this.timerService.resume();
+  }
 }
