@@ -3,7 +3,7 @@
     <app-round-display class="column" [currentStep]="timerService.currentStep"></app-round-display>
     <app-stopwatch class="column" [timer]="timerService.currentTime"></app-stopwatch>
     <app-status-display class="column" [status]="timerService.currentStatus"></app-status-display>
-    <div class="columns has-text-centered">
+    <div class="columns has-text-centered is-gapless">
       <div class="column is-half is-offset-one-quarter">
         <a class="button is-large" (click)="startTimer()">Start timer!</a>
         <a class="button is-large" (click)="startAmrap()">Start AMRAP!</a>
