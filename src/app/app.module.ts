@@ -11,6 +11,7 @@ import { ClockService } from './services/clock.service';
 import { RoundDisplayComponent } from './round-display/round-display.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { SettingsComponent } from './settings/settings.component';
+import { NumericInputComponent } from './numeric-input/numeric-input.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SettingsComponent } from './settings/settings.component';
     StatusDisplayComponent,
     RoundDisplayComponent,
     ToolbarComponent,
-    SettingsComponent
+    SettingsComponent,
+    NumericInputComponent
   ],
   imports: [
     BrowserModule,

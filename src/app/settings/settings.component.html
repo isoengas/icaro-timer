@@ -1,9 +1,10 @@
-<div class="settings">
-  <div class="modal-card-head">
+<div class="settings modal-card">
+  <header class="modal-card-head">
     <p class="modal-card-title">SETTINGS</p>
-  </div>
+    <button class="delete" (click)="onclose.emit()"></button>
+  </header>
   <section class="modal-card-body">
-    <div class="columns is-mobile is-gapless level">
+    <div class="columns is-gapless level">
       <div class="level-left">
         <a class="button is-large level-item" (click)="istimer=true">
           <span class="icon is-large">
@@ -17,7 +18,7 @@
         
       </div>
     </div>
-    <div class="columns is-mobile is-gapless level">
+    <div class="columns is-gapless level">
       <div class="level-left">
         <a class="button is-large level-item" (click)="istimer=false">
           <span class="icon is-large">
@@ -30,15 +31,47 @@
         </a>
       </div>
     </div>
-    <div class="columns is-mobile is-gapless has-text-centered">
-      <div class="column">
-        <a class="button is-large" (click)="onclose.emit()">
-          <span class="icon is-large">
-            <i class="fa fa-check"></i>
-          </span>
-          <span>OK</span>
-        </a>
+    <div class="amrapSettings" *ngIf="!istimer">
+      <div class="columns is-gapless">
+        <div class="column level is-4">
+          <div class="level-left">
+            <span class="level-item">ROUNDS</span>
+            <app-numeric-input [(number)]="amrapSettings.numRounds" [minNumber]="1"></app-numeric-input>
+          </div>
+        </div>
+        <div class="column level is-4">
+          <div class="level-left">
+            <span class="level-item">WORK:</span>
+            <app-numeric-input [(number)]="amrapSettings.workTime.minutes" [minNumber]="0" suffix="MIN."></app-numeric-input>
+          </div>
+        </div>
+        <div class="column level is-4">
+          <div class="level-left">
+            <app-numeric-input [(number)]="amrapSettings.workTime.seconds" [minNumber]="0" [incrementBy]="5" [maxNumber]="59" suffix="SEC."></app-numeric-input>
+          </div>
+        </div>
+      </div>
+      <div class="columns is-gapless">
+        <div class="column level is-4 is-offset-4">
+          <div class="level-left">
+            <span class="level-item">REST:</span>
+            <app-numeric-input [(number)]="amrapSettings.restTime.minutes" [minNumber]="0" suffix="MIN."></app-numeric-input>
+          </div>
+        </div>
+        <div class="column level is-4">
+          <div class="level-left">
+            <app-numeric-input [(number)]="amrapSettings.restTime.seconds" [minNumber]="0" [incrementBy]="5" [maxNumber]="59" suffix="SEC."></app-numeric-input>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+  <footer class="modal-card-foot">
+    <a class="button is-large" (click)="onclose.emit()">
+      <span class="icon is-large">
+        <i class="fa fa-check"></i>
+      </span>
+      <span>OK</span>
+    </a>
+  </footer>
 </div>

@@ -22,8 +22,5 @@
 </div>
 <div class="modal" [ngClass]="{'is-active': isSettingsOpen}">
   <div class="modal-background"></div>
-  <div class="modal-card">
-    <app-settings [(settings)]="currentSettings" (onclose)="isSettingsOpen=false"></app-settings>
-  </div>
-  <button class="modal-close" (click)="isSettingsOpen=false"></button>
+  <app-settings [(settings)]="currentSettings" (onclose)="isSettingsOpen=false"></app-settings>
 </div>
