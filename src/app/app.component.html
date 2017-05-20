@@ -12,7 +12,7 @@
     <app-status-display class="column" [status]="timerService.currentStatus"></app-status-display>
     <app-toolbar class="column" [status]="timerService.currentStatus" 
                  [isRunning]="timerService.running"
-                 (start)="startAmrap()"
+                 (start)="start()"
                  (stop)="stop()"
                  (pause)="pause()"
                  (resume)="resume()"
@@ -20,10 +20,10 @@
     </app-toolbar>
   </div>
 </div>
-<div class="modal" [ngClass]="{'is-active': isSetup}">
+<div class="modal" [ngClass]="{'is-active': isSettingsOpen}">
   <div class="modal-background"></div>
   <div class="modal-content">
-    <app-setup></app-setup>
+    <app-settings [(settings)]="currentSettings" (onclose)="isSettingsOpen=false"></app-settings>
   </div>
-  <button class="modal-close" (click)="isSetup=false"></button>
+  <button class="modal-close" (click)="isSettingsOpen=false"></button>
 </div>

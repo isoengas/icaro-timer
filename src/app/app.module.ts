@@ -10,7 +10,7 @@ import { Timer } from './services/timer';
 import { ClockService } from './services/clock.service';
 import { RoundDisplayComponent } from './round-display/round-display.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { SetupComponent } from './setup/setup.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { SetupComponent } from './setup/setup.component';
     StatusDisplayComponent,
     RoundDisplayComponent,
     ToolbarComponent,
-    SetupComponent
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

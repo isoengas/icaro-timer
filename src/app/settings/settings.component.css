@@ -1,0 +1,10 @@
+.settings {
+    font-size: 5vmin;
+    padding: 12px;
+}
+.title {
+    font-size: 1.25em;
+}
+.button.level-item {
+    font-size: inherit;
+}

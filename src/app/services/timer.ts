@@ -28,15 +28,21 @@ export class Timer {
     constructor(private clock: ClockService) {
         this.clock.tick.subscribe(() => this.pulse());
     }
-
-    public startAMPRAP(settings: IAmrapSettings): void {
+    public start(settings: AmrapSettings | TimerSettings): void {
+        if (settings instanceof AmrapSettings) {
+            this.startAMPRAP(settings);
+        } else {
+            this.startTimer(settings);
+        }
+    }
+    private startAMPRAP(settings: AmrapSettings): void {
         this.running = true;
         this.currentStep = null;
         this.steps = this.getAmrapSteps(settings);
         this.initTimer();
     }
 
-    private getAmrapSteps(settings: IAmrapSettings): Array<TimerStep> {
+    private getAmrapSteps(settings: AmrapSettings): Array<TimerStep> {
         const result = new Array<TimerStep>();
         result.push(this.readyStep());
         for (let i = 1; i <= settings.numRounds; i++) {
@@ -60,7 +66,7 @@ export class Timer {
         return result;
     }
 
-    public startTimer(settings: ITimerSettings): void {
+    private startTimer(settings: TimerSettings): void {
         this.running = true;
         this.currentStep = null;
         this.steps = this.getTimerSteps(settings);
@@ -86,7 +92,7 @@ export class Timer {
         this.clock.stop();
     }
 
-    private getTimerSteps(settings: ITimerSettings): Array<TimerStep> {
+    private getTimerSteps(settings: TimerSettings): Array<TimerStep> {
         const result = new Array<TimerStep>();
         result.push(this.readyStep());
         const workTime = settings.timeCap || { minutes: 99, seconds: 59 };
@@ -200,14 +206,15 @@ export interface ITime {
     seconds: number;
 }
 
-export interface IAmrapSettings {
+export class AmrapSettings {
     numRounds: number;
     workTime: ITime;
     restTime: ITime;
 }
 
-export interface ITimerSettings {
+export class TimerSettings {
     timeCap?: ITime;
     timerDirection: TimerDirection;
-
 }
+
+export type Settings = TimerSettings | AmrapSettings;

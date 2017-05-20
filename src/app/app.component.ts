@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Timer, ITimerSettings, IAmrapSettings } from './services/timer';
+import { Timer, AmrapSettings, TimerSettings } from './services/timer';
 
 @Component({
   selector: 'app-root',
@@ -7,33 +7,40 @@ import { Timer, ITimerSettings, IAmrapSettings } from './services/timer';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  isSetup = false;
-  constructor(public timerService: Timer) {}
-
-  startTimer(): void {
-    const timerSettings: ITimerSettings = {
-      timerDirection: 'Down',
-      timeCap: {
-        minutes: 1,
-        seconds: 0
-      }
-    } ;
-    this.timerService.startTimer(timerSettings);
+  isSettingsOpen = false;
+  currentSettings: TimerSettings | AmrapSettings;
+  constructor(public timerService: Timer) {
+    this.currentSettings = new TimerSettings();
+    this.currentSettings.timerDirection = 'Up';
   }
 
-  startAmrap(): void {
-    const amrapSettings: IAmrapSettings = {
-      numRounds: 8,
-      workTime: {
-        minutes: 0,
-        seconds: 20
-      },
-      restTime: {
-        minutes: 0,
-        seconds: 10
-      }
-    };
-    this.timerService.startAMPRAP(amrapSettings);
+  // startTimer(): void {
+  //   const timerSettings: ITimerSettings = {
+  //     timerDirection: 'Down',
+  //     timeCap: {
+  //       minutes: 1,
+  //       seconds: 0
+  //     }
+  //   } ;
+  //   this.timerService.startTimer(timerSettings);
+  // }
+
+  // startAmrap(): void {
+  //   const amrapSettings: IAmrapSettings = {
+  //     numRounds: 8,
+  //     workTime: {
+  //       minutes: 0,
+  //       seconds: 20
+  //     },
+  //     restTime: {
+  //       minutes: 0,
+  //       seconds: 10
+  //     }
+  //   };
+  //   this.timerService.startAMPRAP(amrapSettings);
+  // }
+  start(): void {
+    this.timerService.start(this.currentSettings);
   }
 
   stop(): void {
@@ -47,6 +54,6 @@ export class AppComponent {
     this.timerService.resume();
   }
   setup(): void {
-    this.isSetup = true;
+    this.isSettingsOpen = true;
   }
 }
