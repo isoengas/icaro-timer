@@ -1,42 +1,44 @@
-<div class="settings hero is-dark">
-  <div class="columns is-gapless">
-    <div class="column is-mobile has-text-centered title">SETTINGS</div>
+<div class="settings">
+  <div class="modal-card-head">
+    <p class="modal-card-title">SETTINGS</p>
   </div>
-  <div class="columns is-mobile is-gapless level">
-    <div class="level-left">
-      <a class="button is-dark is-large level-item" (click)="istimer=true">
-        <span class="icon is-large">
-          <i *ngIf="istimer" class="fa fa-dot-circle-o"></i>
-          <i *ngIf="!istimer" class="fa fa-circle"></i>
-        </span>
-        <span class="level-item">
-          TIMER
-        </span>
-      </a>
-      
+  <section class="modal-card-body">
+    <div class="columns is-mobile is-gapless level">
+      <div class="level-left">
+        <a class="button is-large level-item" (click)="istimer=true">
+          <span class="icon is-large">
+            <i *ngIf="istimer" class="fa fa-dot-circle-o"></i>
+            <i *ngIf="!istimer" class="fa fa-circle"></i>
+          </span>
+          <span class="level-item">
+            TIMER
+          </span>
+        </a>
+        
+      </div>
     </div>
-  </div>
-  <div class="columns is-mobile is-gapless level">
-    <div class="level-left">
-      <a class="button is-dark is-large level-item" (click)="istimer=false">
-        <span class="icon is-large">
-          <i *ngIf="!istimer" class="fa fa-dot-circle-o"></i>
-          <i *ngIf="istimer" class="fa fa-circle"></i>
-        </span>
-        <span class="level-item">
-          AMRAP
-        </span>
-      </a>
+    <div class="columns is-mobile is-gapless level">
+      <div class="level-left">
+        <a class="button is-large level-item" (click)="istimer=false">
+          <span class="icon is-large">
+            <i *ngIf="!istimer" class="fa fa-dot-circle-o"></i>
+            <i *ngIf="istimer" class="fa fa-circle"></i>
+          </span>
+          <span class="level-item">
+            AMRAP
+          </span>
+        </a>
+      </div>
     </div>
-  </div>
-  <div class="columns is-mobile is-gapless has-text-centered">
-    <div class="column">
-      <a class="button is-large" (click)="onclose.emit()">
-        <span class="icon is-large">
-          <i class="fa fa-check"></i>
-        </span>
-        <span>OK</span>
-      </a>
+    <div class="columns is-mobile is-gapless has-text-centered">
+      <div class="column">
+        <a class="button is-large" (click)="onclose.emit()">
+          <span class="icon is-large">
+            <i class="fa fa-check"></i>
+          </span>
+          <span>OK</span>
+        </a>
+      </div>
     </div>
-  </div>
+  </section>
 </div>
