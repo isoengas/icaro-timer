@@ -34,7 +34,7 @@ export class NumericInputComponent implements OnInit {
   decrement(): void {
     this.number -= this.incrementBy;
     if (this.number < this.minNumber) {
-      this.number = this.maxNumber;
+      this.number = this.maxNumber - this.incrementBy + 1;
     }
     this.numberChange.emit(this.number);
   }
