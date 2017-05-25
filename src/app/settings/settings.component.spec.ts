@@ -1,14 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SettingsComponent } from './settings.component';
+import { NumericInputComponent } from '../numeric-input/numeric-input.component';
+import { TimePipe } from '../time.pipe';
 
-describe('SetupComponent', () => {
+describe('SetingsComponent', () => {
   let component: SettingsComponent;
   let fixture: ComponentFixture<SettingsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SettingsComponent ]
+      declarations: [ SettingsComponent, NumericInputComponent, TimePipe ]
     })
     .compileComponents();
   }));

@@ -8,6 +8,10 @@ import { SettingsComponent } from './settings/settings.component';
 import { Timer } from './services/timer';
 import { ClockService } from './services/clock.service';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { SettingsDisplayComponent } from './settings-display/settings-display.component';
+import { NumericInputComponent } from './numeric-input/numeric-input.component';
+import { TimePipe } from './time.pipe';
+import { StorageService } from './services/storage.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -18,11 +22,15 @@ describe('AppComponent', () => {
         StatusDisplayComponent,
         RoundDisplayComponent,
         SettingsComponent,
-        ToolbarComponent
+        ToolbarComponent,
+        SettingsDisplayComponent,
+        NumericInputComponent,
+        TimePipe
       ],
       providers: [
         Timer,
-        ClockService
+        ClockService,
+        StorageService
       ]
     }).compileComponents();
   }));

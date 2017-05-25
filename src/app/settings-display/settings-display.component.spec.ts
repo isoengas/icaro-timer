@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SettingsDisplayComponent } from './settings-display.component';
+import { TimePipe } from '../time.pipe';
 
 describe('SettingsDisplayComponent', () => {
   let component: SettingsDisplayComponent;
@@ -8,7 +9,7 @@ describe('SettingsDisplayComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SettingsDisplayComponent ]
+      declarations: [ SettingsDisplayComponent, TimePipe ]
     })
     .compileComponents();
   }));

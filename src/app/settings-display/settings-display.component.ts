@@ -25,6 +25,6 @@ export class SettingsDisplayComponent implements OnInit {
     return this.isAmrap(this.settings) && (this.settings.restTime.minutes > 0 || this.settings.restTime.seconds > 0);
   }
   isAmrap(settings: Settings): settings is AmrapSettings {
-    return (<AmrapSettings>settings).numRounds !== undefined;
+    return settings && (<AmrapSettings>settings).numRounds !== undefined;
   }
 }

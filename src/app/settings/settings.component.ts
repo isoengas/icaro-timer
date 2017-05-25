@@ -47,7 +47,7 @@ export class SettingsComponent implements OnInit {
   }
 
   isAmrap(settings: Settings): settings is AmrapSettings {
-    return (<AmrapSettings>settings).numRounds !== undefined;
+    return settings && (<AmrapSettings>settings).numRounds !== undefined;
   }
 
 }
