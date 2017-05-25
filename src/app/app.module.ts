@@ -12,6 +12,8 @@ import { RoundDisplayComponent } from './round-display/round-display.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { SettingsComponent } from './settings/settings.component';
 import { NumericInputComponent } from './numeric-input/numeric-input.component';
+import { SettingsDisplayComponent } from './settings-display/settings-display.component';
+import { TimePipe } from './time.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { NumericInputComponent } from './numeric-input/numeric-input.component';
     RoundDisplayComponent,
     ToolbarComponent,
     SettingsComponent,
-    NumericInputComponent
+    NumericInputComponent,
+    SettingsDisplayComponent,
+    TimePipe
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,10 @@
         </span>
       </a>
     </div>
-    <app-round-display class="column" [currentStep]="timerService.currentStep"></app-round-display>
+    <div class="heading">
+      <app-round-display *ngIf="timerService.currentStep" class="column" [currentStep]="timerService.currentStep"></app-round-display>
+      <app-settings-display *ngIf="!timerService.currentStep" class="column" [settings]="currentSettings"></app-settings-display>
+    </div>
     <app-stopwatch class="column" [timer]="timerService.currentTime" [isRunning]="timerService.running"></app-stopwatch>
     <app-status-display class="column" [status]="timerService.currentStatus"></app-status-display>
     <app-toolbar class="column" [status]="timerService.currentStatus" 

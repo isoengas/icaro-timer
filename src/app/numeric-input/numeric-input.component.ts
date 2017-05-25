@@ -17,7 +17,7 @@ export class NumericInputComponent implements OnInit {
   @Output()
   numberChange = new EventEmitter<number>();
   @Input()
-  suffix = "";
+  suffix = '';
   constructor() { }
 
   ngOnInit() {

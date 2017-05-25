@@ -43,7 +43,7 @@
         </div>
         <div class="card column is-4">
           <header class="card-header">
-            <p class="card-header-title">WORK (<span *ngIf="amrapSettings.workTime.minutes">{{amrapSettings.workTime.minutes}}´</span><span>{{amrapSettings.workTime.seconds | number:'2.0-0'}}´´</span>)</p>
+            <p class="card-header-title">WORK ({{amrapSettings.workTime | time}})</p>
           </header>
           <div class="column columns is-mobile">
             <div class="column">
@@ -60,7 +60,7 @@
         </div>
         <div class="card column is-4">
           <header class="card-header">
-            <p class="card-header-title">REST (<span *ngIf="amrapSettings.restTime.minutes">{{amrapSettings.restTime.minutes}}´</span><span>{{amrapSettings.restTime.seconds | number:'2.0-0'}}´´</span>)</p>
+            <p class="card-header-title">REST ({{amrapSettings.restTime | time}})</p>
           </header>
           <div class="column columns is-mobile">
             <div class="column">
