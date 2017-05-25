@@ -14,6 +14,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { NumericInputComponent } from './numeric-input/numeric-input.component';
 import { SettingsDisplayComponent } from './settings-display/settings-display.component';
 import { TimePipe } from './time.pipe';
+import { StorageService } from './services/storage.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { TimePipe } from './time.pipe';
   ],
   providers: [
     Timer,
-    ClockService
+    ClockService,
+    StorageService
   ],
   bootstrap: [AppComponent]
 })

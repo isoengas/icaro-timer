@@ -19,9 +19,12 @@ export class SettingsDisplayComponent implements OnInit {
   ngOnInit() {
   }
   get isTimer(): boolean {
-    return this.settings instanceof TimerSettings;
+    return !this.isAmrap(this.settings);
   }
   get hasRest(): boolean {
-    return this.settings instanceof AmrapSettings && (this.settings.restTime.minutes > 0 || this.settings.restTime.seconds > 0);
+    return this.isAmrap(this.settings) && (this.settings.restTime.minutes > 0 || this.settings.restTime.seconds > 0);
+  }
+  isAmrap(settings: Settings): settings is AmrapSettings {
+    return (<AmrapSettings>settings).numRounds !== undefined;
   }
 }

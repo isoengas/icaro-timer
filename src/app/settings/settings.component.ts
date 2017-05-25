@@ -27,15 +27,15 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.settings instanceof TimerSettings) {
-      this.timerSettings = this.settings;
-    } else {
+    if (this.isAmrap(this.settings)) {
       this.amrapSettings = this.settings;
+    } else {
+      this.timerSettings = this.settings;
     }
   }
 
   get istimer(): boolean {
-    return this.settings instanceof TimerSettings;
+    return !this.isAmrap(this.settings);
   }
   set istimer(value: boolean) {
     if (value) {
@@ -44,6 +44,10 @@ export class SettingsComponent implements OnInit {
       this.settings = this.amrapSettings;
     }
     this.settingsChange.emit(this.settings);
+  }
+
+  isAmrap(settings: Settings): settings is AmrapSettings {
+    return (<AmrapSettings>settings).numRounds !== undefined;
   }
 
 }
