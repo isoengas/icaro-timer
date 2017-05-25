@@ -33,7 +33,7 @@
       <div class="columns is-gapless">
         <div class="card column is-4">
           <header class="card-header">
-            <p class="card-header-title">ROUNDS</p>
+            <p class="card-header-title"><span>{{amrapSettings.numRounds}} ROUNDS</span></p>
           </header>
           <div class="column">
             <div class="level-left">
@@ -43,31 +43,35 @@
         </div>
         <div class="card column is-4">
           <header class="card-header">
-            <p class="card-header-title">WORK</p>
+            <p class="card-header-title">WORK ({{amrapSettings.workTime | time}})</p>
           </header>
-          <div class="column">
-            <div class="level-left">
-              <app-numeric-input [(number)]="amrapSettings.workTime.minutes" [minNumber]="0" suffix="MIN."></app-numeric-input>
+          <div class="column columns is-mobile">
+            <div class="column">
+              <div class="level-left">
+                <app-numeric-input [(number)]="amrapSettings.workTime.minutes" [minNumber]="0" suffix="MIN."></app-numeric-input>
+              </div>
             </div>
-          </div>
-          <div class="column">
-            <div class="level-left">
-              <app-numeric-input [(number)]="amrapSettings.workTime.seconds" [minNumber]="0" [incrementBy]="5" [maxNumber]="59" suffix="SEC."></app-numeric-input>
+            <div class="column">
+              <div class="level-left">
+                <app-numeric-input [(number)]="amrapSettings.workTime.seconds" [minNumber]="0" [incrementBy]="5" [maxNumber]="59" suffix="SEC."></app-numeric-input>
+              </div>
             </div>
           </div>
         </div>
         <div class="card column is-4">
           <header class="card-header">
-            <p class="card-header-title">REST</p>
+            <p class="card-header-title">REST ({{amrapSettings.restTime | time}})</p>
           </header>
-          <div class="column">
-            <div class="level-left">
-              <app-numeric-input [(number)]="amrapSettings.restTime.minutes" [minNumber]="0" suffix="MIN."></app-numeric-input>
+          <div class="column columns is-mobile">
+            <div class="column">
+              <div class="level-left">
+                <app-numeric-input [(number)]="amrapSettings.restTime.minutes" [minNumber]="0" suffix="MIN."></app-numeric-input>
+              </div>
             </div>
-          </div>
-          <div class="column">
-            <div class="level-left">
-              <app-numeric-input [(number)]="amrapSettings.restTime.seconds" [minNumber]="0" [incrementBy]="5" [maxNumber]="59" suffix="SEC."></app-numeric-input>
+            <div class="column">
+              <div class="level-left">
+                <app-numeric-input [(number)]="amrapSettings.restTime.seconds" [minNumber]="0" [incrementBy]="5" [maxNumber]="59" suffix="SEC."></app-numeric-input>
+              </div>
             </div>
           </div>
         </div>

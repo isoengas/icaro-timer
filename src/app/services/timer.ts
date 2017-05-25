@@ -29,7 +29,7 @@ export class Timer {
         this.clock.tick.subscribe(() => this.pulse());
     }
     public start(settings: AmrapSettings | TimerSettings): void {
-        if (settings instanceof AmrapSettings) {
+        if (this.isAmrap(settings)) {
             this.startAMPRAP(settings);
         } else {
             this.startTimer(settings);
@@ -64,6 +64,10 @@ export class Timer {
             }
         }
         return result;
+    }
+
+    private isAmrap(settings: Settings): settings is AmrapSettings {
+        return (<AmrapSettings>settings).numRounds !== undefined;
     }
 
     private startTimer(settings: TimerSettings): void {

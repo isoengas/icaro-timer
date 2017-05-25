@@ -1,10 +1,10 @@
-import { Timer, ITimerSettings } from './timer';
+import { Timer, TimerSettings } from './timer';
 import { FakeClockService } from './clock.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 describe('Timer tests', () => {
     let timer: Timer;
-    const timerUpSettings: ITimerSettings = {
+    const timerUpSettings: TimerSettings = {
         timerDirection: 'Up',
         timeCap: {
             seconds: 5,
@@ -26,7 +26,7 @@ describe('Timer tests', () => {
         expect(timer.currentStatus).toBe('Idle');
     });
     it('should start timer with Ready state', () => {
-        timer.startTimer(timerUpSettings);
+        timer.start(timerUpSettings);
         expect(timer.currentStatus).toBe('Ready');
         expect(timer.running).toBe(true);
         expect(timer.currentTime.seconds).toBe(10);
@@ -34,7 +34,7 @@ describe('Timer tests', () => {
         expect(timer.currentStep.direction).toBe('Down');
     });
     it('should count down to 1 on Ready state', () => {
-        timer.startTimer(timerUpSettings);
+        timer.start(timerUpSettings);
         for (let i = 1; i <= 9; i++) {
             timer.pulse();
             expect(timer.currentTime.seconds).toBe(10 - i);
@@ -44,7 +44,7 @@ describe('Timer tests', () => {
         expect(timer.currentTime.seconds).toBe(1);
     });
     it('should start counting after ready state', () => {
-        timer.startTimer(timerUpSettings);
+        timer.start(timerUpSettings);
         for (let i = 1; i <= 9; i++) {
             timer.pulse();
         }
@@ -61,7 +61,7 @@ describe('Timer tests', () => {
         expect(timer.currentStatus).toBe('Work');
     });
     it('should finish when reaching final time', () => {
-        timer.startTimer(timerUpSettings);
+        timer.start(timerUpSettings);
         // Ready countdown
         for (let i = 1; i <= 9; i++) {
             timer.pulse();

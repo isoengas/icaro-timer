@@ -1,0 +1,15 @@
+<div class="settings-display has-text-centered">
+  <span *ngIf="isTimer">TIMER</span>
+  <span *ngIf="!isTimer">
+    {{settings.numRounds | i18nPlural: roundsPluralization}},
+    <span>
+      {{settings.workTime | time}} WORK,
+    </span>
+    <span *ngIf="hasRest">
+      {{settings.restTime | time }} REST
+    </span>
+    <span *ngIf="!hasRest">
+      NO REST
+    </span>
+  </span>
+</div>

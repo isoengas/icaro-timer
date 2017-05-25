@@ -1,5 +1,23 @@
-<div class="level">
-  <a class="level-item button" (click)="decrement()">-</a>
-  <span class="level-item">{{number}} {{suffix}}</span>
-  <a class="level-item button" (click)="increment()">+</a>
+<div>
+  <div>
+    <a class="button" (click)="increment()">
+      <span class="icon">
+        <i class="fa fa-caret-up"></i>
+      </span>
+    </a>
+  </div>
+</div>
+<div>
+  <div>
+    <span >{{number}} {{suffix}}</span>
+  </div>
+</div>
+<div>
+  <div>
+    <a class="button" (click)="decrement()">
+      <span class="icon">
+        <i class="fa fa-caret-down"></i>
+      </span>
+    </a>
+  </div>
 </div>
