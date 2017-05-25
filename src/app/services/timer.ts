@@ -215,6 +215,9 @@ export class AmrapSettings {
 export class TimerSettings {
     timeCap?: ITime;
     timerDirection: TimerDirection;
+    constructor() {
+        this.timerDirection = 'Up';
+    }
 }
 
 export type Settings = TimerSettings | AmrapSettings;
