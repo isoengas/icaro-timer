@@ -6,3 +6,6 @@
 .heading {
     font-size: 10vmin;
 }
+.is-dark {
+    background: #111;
+}
