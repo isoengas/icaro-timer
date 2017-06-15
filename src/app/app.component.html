@@ -9,7 +9,7 @@
     </div>
     <div class="heading">
       <app-round-display *ngIf="timerService.currentStep" class="column" [currentStep]="timerService.currentStep"></app-round-display>
-      <app-settings-display *ngIf="!timerService.currentStep" class="column" [settings]="currentSettings"></app-settings-display>
+      <app-settings-display *ngIf="!timerService.currentStep" class="column" [clockSettings]="currentClockSettings"></app-settings-display>
     </div>
     <app-stopwatch class="column" [timer]="timerService.currentTime" [isRunning]="timerService.running"></app-stopwatch>
     <app-status-display class="column" [status]="timerService.currentStatus"></app-status-display>
@@ -25,5 +25,5 @@
 </div>
 <div class="modal" [ngClass]="{'is-active': isSettingsOpen}">
   <div class="modal-background"></div>
-  <app-settings [(settings)]="currentSettings" (onclose)="settingsApplied()"></app-settings>
+  <app-settings [(clockSettings)]="currentClockSettings" [(withSound)]="withSound" (onclose)="settingsApplied()"></app-settings>
 </div>

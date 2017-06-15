@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Settings, TimerSettings, AmrapSettings } from '../services/timer';
+import { ClockSettings, TimerSettings, AmrapSettings } from '../services/timer';
 
 @Component({
   selector: 'app-settings-display',
@@ -8,7 +8,7 @@ import { Settings, TimerSettings, AmrapSettings } from '../services/timer';
 })
 export class SettingsDisplayComponent implements OnInit {
   @Input()
-  settings: Settings;
+  clockSettings: ClockSettings;
   roundsPluralization: {[k: string]: string} =
   {
     '=1': '1 ROUND',
@@ -19,12 +19,12 @@ export class SettingsDisplayComponent implements OnInit {
   ngOnInit() {
   }
   get isTimer(): boolean {
-    return !this.isAmrap(this.settings);
+    return !this.isAmrap(this.clockSettings);
   }
   get hasRest(): boolean {
-    return this.isAmrap(this.settings) && (this.settings.restTime.minutes > 0 || this.settings.restTime.seconds > 0);
+    return this.isAmrap(this.clockSettings) && (this.clockSettings.restTime.minutes > 0 || this.clockSettings.restTime.seconds > 0);
   }
-  isAmrap(settings: Settings): settings is AmrapSettings {
+  isAmrap(settings: TimerSettings | AmrapSettings): settings is AmrapSettings {
     return settings && (<AmrapSettings>settings).numRounds !== undefined;
   }
 }

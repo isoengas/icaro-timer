@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Timer, Settings, AmrapSettings, TimerSettings } from './services/timer';
+import { Timer, AmrapSettings, TimerSettings, ClockSettings } from './services/timer';
 import { StorageService } from './services/storage.service';
 
 @Component({
@@ -9,10 +9,12 @@ import { StorageService } from './services/storage.service';
 })
 export class AppComponent {
   isSettingsOpen = false;
-  currentSettings: TimerSettings | AmrapSettings;
+  currentClockSettings: ClockSettings;
+  withSound: boolean;
   constructor(public timerService: Timer, private storageService: StorageService) {
-    localStorage.getItem('settings');
-    this.currentSettings = storageService.read<Settings>('settings') || new TimerSettings();
+    const clockSettings = new TimerSettings();
+    this.currentClockSettings = storageService.read<ClockSettings>('settings') || clockSettings;
+    this.withSound = storageService.read<boolean>('withSound') || false;
   }
 
   // startTimer(): void {
@@ -41,7 +43,7 @@ export class AppComponent {
   //   this.timerService.startAMPRAP(amrapSettings);
   // }
   start(): void {
-    this.timerService.start(this.currentSettings);
+    this.timerService.start(this.currentClockSettings, this.withSound);
   }
 
   stop(): void {
@@ -58,7 +60,8 @@ export class AppComponent {
     this.isSettingsOpen = true;
   }
   settingsApplied(): void {
-    this.storageService.write('settings', this.currentSettings);
+    this.storageService.write('settings', this.currentClockSettings);
+    this.storageService.write('withSound', this.withSound);
     this.isSettingsOpen = false;
   }
 }

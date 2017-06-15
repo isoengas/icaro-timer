@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { ClockService } from './clock.service';
+import { BeeperService } from './beeper.service';
 
 export type TimerStatus = 'Idle' | 'Ready' | 'Work' | 'Rest' | 'Finished';
 export type TimerDirection = 'Up' |'Down';
@@ -11,6 +12,7 @@ export class TimerStep {
     time: ITime;
     roundNumber: number;
     totalRounds: number;
+    playEndSound? = false;
 }
 
 @Injectable()
@@ -24,15 +26,17 @@ export class Timer {
     public currentTime$ = new Subject<ITime>();
     public currentStatus$ = new Subject<TimerStatus>();
     public currentStep$ = new Subject<TimerStep>();
+    private withSound: boolean;
 
-    constructor(private clock: ClockService) {
+    constructor(private clock: ClockService, private beeper: BeeperService) {
         this.clock.tick.subscribe(() => this.pulse());
     }
-    public start(settings: AmrapSettings | TimerSettings): void {
-        if (this.isAmrap(settings)) {
-            this.startAMPRAP(settings);
+    public start(clockSettings: ClockSettings, sound: boolean): void {
+        this.withSound = sound;
+        if (this.isAmrap(clockSettings)) {
+            this.startAMPRAP(clockSettings);
         } else {
-            this.startTimer(settings);
+            this.startTimer(clockSettings);
         }
     }
     private startAMPRAP(settings: AmrapSettings): void {
@@ -63,10 +67,12 @@ export class Timer {
                 });
             }
         }
+        result[0].playEndSound = this.withSound;
+        result[result.length - 1].playEndSound = this.withSound;
         return result;
     }
 
-    private isAmrap(settings: Settings): settings is AmrapSettings {
+    private isAmrap(settings: AmrapSettings | TimerSettings): settings is AmrapSettings {
         return (<AmrapSettings>settings).numRounds !== undefined;
     }
 
@@ -105,7 +111,8 @@ export class Timer {
             direction: settings.timerDirection,
             time: workTime,
             roundNumber: 1,
-            totalRounds: 1
+            totalRounds: 1,
+            playEndSound: this.withSound
         });
         return result;
     }
@@ -142,12 +149,18 @@ export class Timer {
         if (this.currentStep.direction === 'Up') {
             this.currentTime = this.incrementedOneSecond(this.currentTime);
             if (this.currentTime.minutes === this.currentStep.time.minutes && this.currentTime.seconds === this.currentStep.time.seconds) {
+                if (this.currentStep.playEndSound) {
+                    this.beeper.finishSound();
+                }
                 this.currentStep = null;
                 this.everySecond();
             }
         } else {
             this.currentTime = this.decrementedOneSecond(this.currentTime);
             if (this.currentTime.minutes === 0 && this.currentTime.seconds === 0) {
+                if (this.currentStep.playEndSound) {
+                    this.beeper.finishSound();
+                }
                 this.currentStep = null;
                 this.everySecond();
             }
@@ -157,6 +170,7 @@ export class Timer {
 
     private setCurrentStep(step: TimerStep): void {
         this.currentStep = step;
+
         if (step.direction === 'Down') {
             this.currentTime = step.time;
         } else {
@@ -224,4 +238,4 @@ export class TimerSettings {
     }
 }
 
-export type Settings = TimerSettings | AmrapSettings;
+export type ClockSettings = TimerSettings | AmrapSettings;

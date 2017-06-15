@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Settings, TimerSettings, AmrapSettings } from '../services/timer';
+import { ClockSettings, TimerSettings, AmrapSettings } from '../services/timer';
 
 @Component({
   selector: 'app-settings',
@@ -8,9 +8,13 @@ import { Settings, TimerSettings, AmrapSettings } from '../services/timer';
 })
 export class SettingsComponent implements OnInit {
   @Input()
-  settings: Settings;
+  clockSettings: ClockSettings;
+  @Input()
+  withSound: boolean;
   @Output()
-  settingsChange = new EventEmitter<Settings>();
+  clockSettingsChange = new EventEmitter<ClockSettings>();
+  @Output()
+  withSoundChange = new EventEmitter<boolean>();
   @Output()
   onclose = new EventEmitter();
 
@@ -27,27 +31,31 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.isAmrap(this.settings)) {
-      this.amrapSettings = this.settings;
+    if (this.isAmrap(this.clockSettings)) {
+      this.amrapSettings = this.clockSettings;
     } else {
-      this.timerSettings = this.settings;
+      this.timerSettings = this.clockSettings;
     }
   }
 
   get istimer(): boolean {
-    return !this.isAmrap(this.settings);
+    return !this.isAmrap(this.clockSettings);
   }
   set istimer(value: boolean) {
     if (value) {
-      this.settings = this.timerSettings;
+      this.clockSettings = this.timerSettings;
     } else {
-      this.settings = this.amrapSettings;
+      this.clockSettings = this.amrapSettings;
     }
-    this.settingsChange.emit(this.settings);
+    this.clockSettingsChange.emit(this.clockSettings);
   }
 
-  isAmrap(settings: Settings): settings is AmrapSettings {
+  isAmrap(settings: ClockSettings): settings is AmrapSettings {
     return settings && (<AmrapSettings>settings).numRounds !== undefined;
   }
 
+  toggleWithSound(): void {
+    this.withSound = !this.withSound;
+    this.withSoundChange.emit(this.withSound);
+  }
 }

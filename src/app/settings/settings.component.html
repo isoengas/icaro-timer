@@ -5,6 +5,18 @@
   <section class="modal-card-body">
     <div class="columns is-gapless">
       <div class="column">
+          <a class="button is-large" (click)="toggleWithSound()" [ngClass]="{'is-info':withSound}">
+          <span *ngIf="withSound" class="icon is-large">
+            <i class="fa fa-volume-up"></i>
+          </span>
+          <span *ngIf="!withSound" class="icon is-large">
+            <i class="fa fa-volume-off"></i>
+          </span>
+        </a>
+        </div>
+    </div>
+    <div class="columns is-gapless">
+      <div class="column">
         <a class="button is-large level-item" (click)="istimer=true" [ngClass]="{'is-info':istimer}">
           <span class="icon is-large">
             <i *ngIf="istimer" class="fa fa-check"></i>
@@ -24,9 +36,6 @@
           </span>
         </a>
       </div>
-    </div>
-    <div class="timerSettings" *ngIf="istimer">
-      TIMER SETTINGS
     </div>
     <div class="amrapSettings" *ngIf="!istimer">
       <div class="columns is-gapless">
