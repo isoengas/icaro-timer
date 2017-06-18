@@ -72,7 +72,6 @@ export class Timer {
                 });
             }
         }
-        result[0].playEndSound = this.withSound;
         result[result.length - 1].playEndSound = this.withSound;
         return result;
     }
@@ -225,7 +224,8 @@ export class Timer {
                 minutes: 0
             },
             roundNumber: 0,
-            totalRounds: 0
+            totalRounds: 0,
+            playEndSound: this.withSound
         };
     }
 }
