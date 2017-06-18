@@ -11,10 +11,14 @@ export class SettingsComponent implements OnInit {
   clockSettings: ClockSettings;
   @Input()
   withSound: boolean;
+  @Input()
+  fullScreen: boolean;
   @Output()
   clockSettingsChange = new EventEmitter<ClockSettings>();
   @Output()
   withSoundChange = new EventEmitter<boolean>();
+  @Output()
+  fullScreenChange = new EventEmitter<boolean>();
   @Output()
   onclose = new EventEmitter();
 
@@ -57,5 +61,10 @@ export class SettingsComponent implements OnInit {
   toggleWithSound(): void {
     this.withSound = !this.withSound;
     this.withSoundChange.emit(this.withSound);
+  }
+
+  toggleFullScreen(): void {
+    this.fullScreen = !this.fullScreen;
+    this.fullScreenChange.emit(this.fullScreen);
   }
 }

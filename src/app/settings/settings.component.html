@@ -13,7 +13,18 @@
             <i class="fa fa-volume-off"></i>
           </span>
         </a>
-        </div>
+        <a class="button is-large" (click)="toggleFullScreen()" [ngClass]="{'is-info':fullScreen}">
+          <span *ngIf="fullScreen" class="icon is-large">
+            <i class="fa fa-desktop"></i>
+          </span>
+          <span *ngIf="!fullScreen" class="icon is-large">
+            <i class="fa fa-window-maximize"></i>
+          </span>
+        </a>
+      </div>
+      <div class="column">
+        
+      </div>
     </div>
     <div class="columns is-gapless">
       <div class="column">

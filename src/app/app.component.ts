@@ -11,10 +11,12 @@ export class AppComponent {
   isSettingsOpen = false;
   currentClockSettings: ClockSettings;
   withSound: boolean;
+  fullScreen: boolean;
   constructor(public timerService: Timer, private storageService: StorageService) {
     const clockSettings = new TimerSettings();
     this.currentClockSettings = storageService.read<ClockSettings>('settings') || clockSettings;
     this.withSound = storageService.read<boolean>('withSound') || false;
+    this.fullScreen = storageService.read<boolean>('fullScreen') || false;
   }
 
   // startTimer(): void {
@@ -43,7 +45,7 @@ export class AppComponent {
   //   this.timerService.startAMPRAP(amrapSettings);
   // }
   start(): void {
-    this.timerService.start(this.currentClockSettings, this.withSound);
+    this.timerService.start(this.currentClockSettings, this.withSound, this.fullScreen);
   }
 
   stop(): void {
@@ -62,6 +64,7 @@ export class AppComponent {
   settingsApplied(): void {
     this.storageService.write('settings', this.currentClockSettings);
     this.storageService.write('withSound', this.withSound);
+    this.storageService.write('fullScreen', this.fullScreen);
     this.isSettingsOpen = false;
   }
 }

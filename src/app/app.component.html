@@ -25,5 +25,5 @@
 </div>
 <div class="modal" [ngClass]="{'is-active': isSettingsOpen}">
   <div class="modal-background"></div>
-  <app-settings [(clockSettings)]="currentClockSettings" [(withSound)]="withSound" (onclose)="settingsApplied()"></app-settings>
+  <app-settings [(clockSettings)]="currentClockSettings" [(withSound)]="withSound" [(fullScreen)]="fullScreen" (onclose)="settingsApplied()"></app-settings>
 </div>

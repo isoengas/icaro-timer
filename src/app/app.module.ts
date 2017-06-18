@@ -16,6 +16,7 @@ import { SettingsDisplayComponent } from './settings-display/settings-display.co
 import { TimePipe } from './time.pipe';
 import { StorageService } from './services/storage.service';
 import { BeeperService } from './services/beeper.service';
+import { FullscreenService } from './services/fullscreen.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { BeeperService } from './services/beeper.service';
     Timer,
     ClockService,
     StorageService,
-    BeeperService
+    BeeperService,
+    FullscreenService
   ],
   bootstrap: [AppComponent]
 })

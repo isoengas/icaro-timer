@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { ClockService } from './clock.service';
 import { BeeperService } from './beeper.service';
+import { FullscreenService } from './fullscreen.service';
 
 export type TimerStatus = 'Idle' | 'Ready' | 'Work' | 'Rest' | 'Finished';
 export type TimerDirection = 'Up' |'Down';
@@ -27,12 +28,16 @@ export class Timer {
     public currentStatus$ = new Subject<TimerStatus>();
     public currentStep$ = new Subject<TimerStep>();
     private withSound: boolean;
-
-    constructor(private clock: ClockService, private beeper: BeeperService) {
+    private fullScreen: boolean;
+    constructor(private clock: ClockService, private beeper: BeeperService, private fullscreenService: FullscreenService) {
         this.clock.tick.subscribe(() => this.pulse());
     }
-    public start(clockSettings: ClockSettings, sound: boolean): void {
+    public start(clockSettings: ClockSettings, sound: boolean, fullScreen: boolean): void {
         this.withSound = sound;
+        this.fullScreen = fullScreen;
+        if (fullScreen) {
+            this.fullscreenService.enterFullscreen();
+        }
         if (this.isAmrap(clockSettings)) {
             this.startAMPRAP(clockSettings);
         } else {
@@ -100,6 +105,9 @@ export class Timer {
         this.steps = [];
         this.currentTime = { minutes: 0, seconds: 0 };
         this.clock.stop();
+        if (this.fullScreen) {
+            this.fullscreenService.exitFullscreen();
+        }
     }
 
     private getTimerSteps(settings: TimerSettings): Array<TimerStep> {
@@ -143,6 +151,9 @@ export class Timer {
                 this.running = false;
                 this.currentStatus$.next(this.currentStatus);
                 this.clock.stop();
+                if (this.fullScreen) {
+                    this.fullscreenService.exitFullscreen();
+                }
             }
             return;
         }
