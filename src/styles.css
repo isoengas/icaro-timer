@@ -2,6 +2,7 @@
 html {
     background: black;
     height: 100%; 
+    overflow-y: auto;
 }
 body {
     font-family: 'Oswald', sans-serif;
