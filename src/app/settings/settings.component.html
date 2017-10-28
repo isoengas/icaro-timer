@@ -96,6 +96,45 @@
         </div>
       </div>
     </div>
+    <div class="timerSettings" *ngIf="istimer">
+      <div class="columns is-gapless">
+        <div class="column is-3">
+          <div class="columns is-gapless">
+            <div class="column">
+              <a class="button is-large" (click)="toggleTimeCap()" [ngClass]="{'is-info':timerSettings.timeCap}">
+                <span class="icon is-large">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+              </a>
+            </div>
+            <div class="column" *ngIf="timerSettings.timeCap">
+              <a class="button is-large" (click)="toggleDirection()" [ngClass]="{'is-info':timerSettings.timerDirection=='Down'}">
+                <span class="icon is-large">
+                  <i class="fa fa-arrow-circle-o-down"></i>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="card column is-4" *ngIf="timerSettings.timeCap">
+          <header class="card-header">
+            <p class="card-header-title">TIME CAP ({{timerSettings.timeCap | time}})</p>
+          </header>
+          <div class="column columns is-mobile">
+            <div class="column">
+              <div class="level-left">
+                <app-numeric-input [(number)]="timerSettings.timeCap.minutes" [minNumber]="0" suffix="MIN."></app-numeric-input>
+              </div>
+            </div>
+            <div class="column">
+              <div class="level-left">
+                <app-numeric-input [(number)]="timerSettings.timeCap.seconds" [minNumber]="0" [incrementBy]="5" [maxNumber]="59" suffix="SEC."></app-numeric-input>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
   <footer class="modal-card-foot">
     <a class="button is-large" (click)="onclose.emit()">

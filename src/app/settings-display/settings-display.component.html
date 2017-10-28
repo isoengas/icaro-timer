@@ -1,5 +1,12 @@
 <div class="settings-display has-text-centered">
-  <span *ngIf="isTimer">TIMER</span>
+  <span *ngIf="isTimer">
+    <span *ngIf="!clockSettings.timeCap">
+      TIMER
+    </span>
+    <span *ngIf="clockSettings.timeCap">
+      {{clockSettings.timeCap | time}} {{clockSettings.timerDirection == 'Up' ? 'TIMER' : 'COUNTDOWN'}}
+    </span>
+  </span>
   <span *ngIf="!isTimer">
     {{clockSettings.numRounds | i18nPlural: roundsPluralization}},
     <span>

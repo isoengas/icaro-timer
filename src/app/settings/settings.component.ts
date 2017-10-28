@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ClockSettings, TimerSettings, AmrapSettings } from '../services/timer';
+import { ClockSettings, TimerSettings, AmrapSettings, ITime, TimerDirection } from '../services/timer';
 
 @Component({
   selector: 'app-settings',
@@ -24,14 +24,15 @@ export class SettingsComponent implements OnInit {
 
   timerSettings: TimerSettings;
   amrapSettings: AmrapSettings;
+  oldTimeCap: ITime;
+  oldDirection: TimerDirection;
 
   constructor() {
     this.timerSettings = new TimerSettings();
-    this.timerSettings.timerDirection = 'Up';
     this.amrapSettings = new AmrapSettings();
-    this.amrapSettings.numRounds = 4;
-    this.amrapSettings.workTime = { minutes: 0, seconds: 20 };
-    this.amrapSettings.restTime = { minutes: 0, seconds: 10 };
+    this.amrapSettings.numRounds = 1;
+    this.amrapSettings.workTime = { minutes: 0, seconds: 0 };
+    this.amrapSettings.restTime = { minutes: 0, seconds: 0 };
   }
 
   ngOnInit() {
@@ -66,5 +67,25 @@ export class SettingsComponent implements OnInit {
   toggleFullScreen(): void {
     this.fullScreen = !this.fullScreen;
     this.fullScreenChange.emit(this.fullScreen);
+  }
+
+  toggleDirection(): void {
+    if (this.timerSettings.timerDirection ==='Up') {
+      this.timerSettings.timerDirection = 'Down';
+    } else {
+      this.timerSettings.timerDirection = 'Up';
+    }
+  }
+
+  toggleTimeCap(): void {
+    if (this.timerSettings.timeCap) {
+      this.oldTimeCap = this.timerSettings.timeCap;
+      this.oldDirection = this.timerSettings.timerDirection;
+      this.timerSettings.timeCap = null;
+      this.timerSettings.timerDirection = 'Up';
+    } else {
+      this.timerSettings.timeCap = this.oldTimeCap || { minutes: 10, seconds: 0 };
+      this.timerSettings.timerDirection = this.oldDirection || 'Up';
+    }
   }
 }

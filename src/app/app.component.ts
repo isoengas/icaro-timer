@@ -14,36 +14,13 @@ export class AppComponent {
   fullScreen: boolean;
   constructor(public timerService: Timer, private storageService: StorageService) {
     const clockSettings = new TimerSettings();
+    clockSettings.timerDirection = 'Up';
+    clockSettings.timeCap = null;
     this.currentClockSettings = storageService.read<ClockSettings>('settings') || clockSettings;
     this.withSound = storageService.read<boolean>('withSound') || false;
     this.fullScreen = storageService.read<boolean>('fullScreen') || false;
   }
 
-  // startTimer(): void {
-  //   const timerSettings: ITimerSettings = {
-  //     timerDirection: 'Down',
-  //     timeCap: {
-  //       minutes: 1,
-  //       seconds: 0
-  //     }
-  //   } ;
-  //   this.timerService.startTimer(timerSettings);
-  // }
-
-  // startAmrap(): void {
-  //   const amrapSettings: IAmrapSettings = {
-  //     numRounds: 8,
-  //     workTime: {
-  //       minutes: 0,
-  //       seconds: 20
-  //     },
-  //     restTime: {
-  //       minutes: 0,
-  //       seconds: 10
-  //     }
-  //   };
-  //   this.timerService.startAMPRAP(amrapSettings);
-  // }
   start(): void {
     this.timerService.start(this.currentClockSettings, this.withSound, this.fullScreen);
   }

@@ -167,7 +167,7 @@ export class Timer {
             }
         } else {
             this.currentTime = this.decrementedOneSecond(this.currentTime);
-            if (this.currentTime.minutes === 0 && this.currentTime.seconds === 0) {
+            if (this.currentTime.minutes <= 0 && this.currentTime.seconds <= 0) {
                 if (this.currentStep.playEndSound) {
                     this.beeper.finishSound();
                 }
@@ -204,6 +204,9 @@ export class Timer {
     }
 
     private decrementedOneSecond(currentTime: ITime): ITime {
+        if (currentTime.minutes === 0 && currentTime.seconds === 0) {
+            return currentTime;
+        }
         const result: ITime = {
             seconds: currentTime.seconds - 1,
             minutes: currentTime.minutes
