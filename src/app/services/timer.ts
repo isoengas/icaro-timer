@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import { Subject } from 'rxjs';
 import { ClockService } from './clock.service';
 import { BeeperService } from './beeper.service';
 import { FullscreenService } from './fullscreen.service';
